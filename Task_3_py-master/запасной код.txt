@@ -1,0 +1,73 @@
+def read():
+    arr=[]
+    with open("input01.txt") as f:
+        for line in f:
+            arr.append([int(x) for x in line.split()])
+    return arr
+
+def write(outputINFO):
+    with open("output.txt", "w") as file:
+        for i in range(len(outputINFO)):
+            print(outputINFO[i], file=file)
+
+def IsInside(x1,y1,x2,y2, tmpX,tmpY):
+    if(tmpX>x1)and(tmpX<x2):
+        if(tmpY>y1)and(tmpY<y2):
+            return True
+    return False
+
+def IsOnEdge(x1,y1,x2,y2, tmpX1,tmpY1, tmpX2, tmpY2):
+    # 1 point 
+    if(x1==tmpX1)and(y1<tmpY1<y2): #лева€ грань
+        return True
+
+    if(y1==tmpY1)and(x1<tmpX1<x2): #нижн€€ грань
+        return True
+    # 2 point 
+    if(x2==tmpX2)and(y1<tmpY2<y2):#права€ грант
+        return True
+
+    if(y2== tmpY2)and(x1<tmpX2<x2):#верхн€€ грань
+        return True
+    # 3 point 
+    if(x2==tmpX2)and(y1<tmpY1<y2):#права€ грант
+        return True
+
+    if(y1==tmpY1)and(x1<tmpX2<x2): #нижн€€ грань
+        return True
+    # 4 point 
+    if(x1==tmpX1)and(y1<tmpY2<y2): #лева€ грань
+        return True
+
+    if(y2== tmpY2)and(x1<tmpX1<x2):#верхн€€ грань
+        return True
+
+    return  False
+
+def RectIntersection(arr, n):
+    for i in range(len(arr)):
+        if i==n:
+            continue
+        if(IsInside(arr[i][0],arr[i][1],arr[i][2],arr[i][3],arr[n][0],arr[n][1]))or(IsInside(arr[i][0],arr[i][1],arr[i][2],arr[i][3],arr[n][2],arr[n][3]))or(IsInside(arr[i][0],arr[i][1],arr[i][2],arr[i][3],arr[n][0],arr[n][3]))or(IsInside(arr[i][0],arr[i][1],arr[i][2],arr[i][3],arr[n][2],arr[n][3])):
+            return True
+        if IsOnEdge(arr[n][0],arr[n][1],arr[n][2],arr[n][3],arr[i][0],arr[i][1],arr[i][2],arr[i][3]):
+            return True
+    return False
+
+def InitRes(n):
+    result=[]
+    for i in n:
+        result.append(False)
+    return result
+
+def CheckRectangles(arr):
+    result =InitRes(len(arr))
+    for i in range(len(arr)):
+        result[i]=RectIntersection(arr,i)
+    return result
+
+def main():
+    write(CheckRectangles(read()))
+
+main()
+

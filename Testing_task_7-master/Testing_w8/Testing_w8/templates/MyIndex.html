@@ -1,0 +1,19 @@
+﻿<html>
+<head>
+    <meta charset="utf-8">
+    <title>Task_7</title>
+    <h1 align="center">Syntax highlighting of programming languages</h1>
+</head>
+<body>
+
+    <p><h4>Set prog language:</h4></p>
+    <p><input name="select" type="radio" value="python" checked>Python</p>
+    <p><input name="select" type="radio" value="c#">C#</p>
+
+    <form action="http://localhost:5555/result" method="POST">
+        <p><h4>Set text:</h4> <div style="min-height: 370px; overflow:scroll; border: grey solid 1px;" contenteditable="true" id="FormText">{{ text }}</div></p>
+        <p><button id="submit" type="submit">Send</button></p>
+        <p><button id="clearButton">Clear</button></p>
+    </form>
+</body>
+</html>

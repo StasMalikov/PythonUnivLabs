@@ -1,0 +1,21 @@
+arr=[]
+with open("input.txt") as f:
+    <font color="#4682B4">for</font> line in f:
+        arr.append([int(x) <font color="#4682B4">for</font> x in line.split()])
+
+<font color="#4682B4">for</font> i in range(len(arr)):
+    print(arr[i])
+
+new_arr= arr
+i=0
+
+<font color="#4682B4">for</font> i in range(len(new_arr)):
+    <font color="#4682B4">for</font> j in range(len(new_arr[i])):
+        <font color="#4682B4">if</font>(i+j>=len(new_arr)):
+            continue
+        <font color="#4682B4">else</font>:
+            new_arr[i][i+j],new_arr[i+j][i]=new_arr[i+j][i],new_arr[i][i+j]
+
+with open("output.txt", "w") as file:
+	<font color="#4682B4">for</font> i in range(len(new_arr)):
+		print(new_arr[i], file=file)
